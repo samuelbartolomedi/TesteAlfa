@@ -2,57 +2,59 @@ package com.TesteAlfa.TicketAPI.Entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "Ticket")
 public class Ticket {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String Titulo;
-    private LocalDate DataAbertura;
-    private LocalDate DataEncerramento;
+    @EmbeddedId
+    private TicketPK id = new TicketPK();
+    @Column(columnDefinition = "TEXT")
+    private String titulo;
+    private LocalDate dataAbertura;
+    private LocalDate dataEncerramento;
 
     public Ticket() {
     }
 
-    public Ticket(Long id, String titulo, LocalDate dataAbertura, LocalDate dataEncerramento) {
+    public Ticket(TicketPK id, String titulo, LocalDate dataAbertura, LocalDate dataEncerramento) {
         this.id = id;
-        Titulo = titulo;
-        DataAbertura = dataAbertura;
-        DataEncerramento = dataEncerramento;
+        this.titulo = titulo;
+        this.dataAbertura = dataAbertura;
+        this.dataEncerramento = dataEncerramento;
     }
-    public Long getId() {
+
+    public TicketPK getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(TicketPK id) {
         this.id = id;
     }
 
     public String getTitulo() {
-        return Titulo;
+        return titulo;
     }
 
     public void setTitulo(String titulo) {
-        Titulo = titulo;
+        this.titulo = titulo;
     }
 
     public LocalDate getDataAbertura() {
-        return DataAbertura;
+        return dataAbertura;
     }
 
     public void setDataAbertura(LocalDate dataAbertura) {
-        DataAbertura = dataAbertura;
+        this.dataAbertura = dataAbertura;
     }
 
     public LocalDate getDataEncerramento() {
-        return DataEncerramento;
+        return dataEncerramento;
     }
 
     public void setDataEncerramento(LocalDate dataEncerramento) {
-        DataEncerramento = dataEncerramento;
+        this.dataEncerramento = dataEncerramento;
     }
 }
 
