@@ -20,11 +20,6 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
-    @GetMapping(value = "/{id}")
-    public TicketDTO findById(@PathVariable Long id){
-         return ticketService.findById(id);
-    }
-
     @GetMapping()
     public List<TicketDTO> findAll(){
         return ticketService.findAll();

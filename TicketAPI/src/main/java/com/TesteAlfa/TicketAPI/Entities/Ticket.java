@@ -18,13 +18,6 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(TicketPK id, String titulo, LocalDate dataAbertura, LocalDate dataEncerramento) {
-        this.id = id;
-        this.titulo = titulo;
-        this.dataAbertura = dataAbertura;
-        this.dataEncerramento = dataEncerramento;
-    }
-
     public TicketPK getId() {
         return id;
     }

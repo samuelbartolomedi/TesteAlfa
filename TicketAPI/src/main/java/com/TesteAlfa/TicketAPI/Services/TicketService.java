@@ -17,12 +17,6 @@ public class TicketService {
     private TicketRepository ticketRepository;
 
     @Transactional(readOnly = true)
-    public TicketDTO findById(Long id) {
-        Ticket ticket = ticketRepository.findById(id).get();
-        return new TicketDTO(ticket);
-    }
-
-    @Transactional(readOnly = true)
     public List<TicketDTO> findAll() {
         List<Ticket> result = ticketRepository.findAll();
         return result.stream().map(x -> new TicketDTO(x)).toList();
