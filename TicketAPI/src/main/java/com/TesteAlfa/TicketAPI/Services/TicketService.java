@@ -25,10 +25,31 @@ public class TicketService {
     }
 
     @Transactional(readOnly = true)
-    public List<TicketDTO> findBycliente_id(Long cliente_id) {
-        List<Ticket> tickets = ticketRepository.findBycliente_id(cliente_id);
+    public List<TicketDTO> findByClienteId(Long cliente_id) {
+        List<Ticket> tickets = ticketRepository.findByClienteId(cliente_id);
         return tickets.stream()
                 .map(TicketDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<TicketDTO> findByModuloId(Long cliente_id) {
+        List<Ticket> tickets = ticketRepository.findByModuloId(cliente_id);
+        return tickets.stream()
+                .map(TicketDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional()
+    public TicketDTO insert(TicketDTO ticketDTO) {
+        Ticket ticket = new Ticket();
+        ticket.setId(ticketDTO.getId());
+        ticket.setTitulo(ticketDTO.getTitulo());
+        ticket.setCliente(ticketDTO.getCliente());
+        ticket.setDataAbertura(ticketDTO.getDataAbertura());
+        ticket.setDataEncerramento(ticketDTO.getDataEncerramento());
+        ticket.setModulo(ticketDTO.getModulo());
+        ticket = ticketRepository.save(ticket);
+        return new TicketDTO(ticket);
     }
 }
