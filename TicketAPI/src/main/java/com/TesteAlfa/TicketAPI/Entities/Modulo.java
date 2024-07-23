@@ -1,14 +1,17 @@
 package com.TesteAlfa.TicketAPI.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Modulo")
 public class Modulo {
     @Id
@@ -16,7 +19,4 @@ public class Modulo {
     private Long id;
     @Column(columnDefinition = "TEXT")
     private String nome;
-
-    public Modulo() {
-    }
 }
