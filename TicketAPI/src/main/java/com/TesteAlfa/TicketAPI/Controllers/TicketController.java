@@ -20,15 +20,15 @@ public class TicketController {
         return ticketService.findAll();
     }
 
-    @GetMapping("/byclient/{cliente_id}")
-    public ResponseEntity<List<TicketDTO>> getTicketsByClienteId(@PathVariable Long cliente_id) {
-        List<TicketDTO> tickets = ticketService.findByClienteId(cliente_id);
+    @GetMapping("/byclient/{clienteId}")
+    public ResponseEntity<List<TicketDTO>> getTicketsByClienteId(@PathVariable Long clienteId) {
+        List<TicketDTO> tickets = ticketService.findByClienteId(clienteId);
         return ResponseEntity.ok(tickets);
     }
 
-    @GetMapping("/bymodulo/{modulo_id}")
-    public ResponseEntity<List<TicketDTO>> getTicketsByModuloId(@PathVariable Long modulo_id) {
-        List<TicketDTO> tickets = ticketService.findByModuloId(modulo_id);
+    @GetMapping("/bymodulo/{moduloId}")
+    public ResponseEntity<List<TicketDTO>> getTicketsByModuloId(@PathVariable Long moduloId) {
+        List<TicketDTO> tickets = ticketService.findByModuloId(moduloId);
         return ResponseEntity.ok(tickets);
     }
 

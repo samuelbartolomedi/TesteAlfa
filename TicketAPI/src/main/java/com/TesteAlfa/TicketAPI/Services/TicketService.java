@@ -1,7 +1,6 @@
 package com.TesteAlfa.TicketAPI.Services;
 
 import com.TesteAlfa.TicketAPI.DTOs.TicketDTO;
-import com.TesteAlfa.TicketAPI.Entities.Cliente;
 import com.TesteAlfa.TicketAPI.Entities.Ticket;
 import com.TesteAlfa.TicketAPI.Repositories.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,16 +23,16 @@ public class TicketService {
     }
 
     @Transactional(readOnly = true)
-    public List<TicketDTO> findByClienteId(Long cliente_id) {
-        List<Ticket> tickets = ticketRepository.findByClienteId(cliente_id);
+    public List<TicketDTO> findByClienteId(Long clienteId) {
+        List<Ticket> tickets = ticketRepository.findByClienteId(clienteId);
         return tickets.stream()
                 .map(TicketDTO::new)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<TicketDTO> findByModuloId(Long cliente_id) {
-        List<Ticket> tickets = ticketRepository.findByModuloId(cliente_id);
+    public List<TicketDTO> findByModuloId(Long clienteId) {
+        List<Ticket> tickets = ticketRepository.findByModuloId(clienteId);
         return tickets.stream()
                 .map(TicketDTO::new)
                 .collect(Collectors.toList());
@@ -45,11 +43,12 @@ public class TicketService {
         Ticket ticket = new Ticket();
         ticket.setId(ticketDTO.getId());
         ticket.setTitulo(ticketDTO.getTitulo());
-        ticket.setCliente(ticketDTO.getCliente());
+        ticket.setClienteId(ticketDTO.getClienteId());
         ticket.setDataAbertura(ticketDTO.getDataAbertura());
         ticket.setDataEncerramento(ticketDTO.getDataEncerramento());
-        ticket.setModulo(ticketDTO.getModulo());
+        ticket.setModuloId(ticketDTO.getModuloId());
         ticket = ticketRepository.save(ticket);
         return new TicketDTO(ticket);
     }
+
 }
