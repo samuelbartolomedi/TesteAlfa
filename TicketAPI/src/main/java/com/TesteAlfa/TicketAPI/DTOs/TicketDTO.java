@@ -7,6 +7,7 @@ import lombok.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -15,8 +16,8 @@ import java.time.LocalDate;
 public class TicketDTO {
     private Long id;
     private String titulo;
-    private LocalDate dataAbertura;
-    private LocalDate dataEncerramento;
+    private Date dataAbertura;
+    private Date dataEncerramento;
     private Long clienteId;
     private Long moduloId;
 
@@ -37,11 +38,11 @@ public class TicketDTO {
         return titulo;
     }
 
-    public LocalDate getDataAbertura() {
+    public Date getDataAbertura() {
         return dataAbertura;
     }
 
-    public LocalDate getDataEncerramento() {
+    public Date getDataEncerramento() {
         return dataEncerramento;
     }
 

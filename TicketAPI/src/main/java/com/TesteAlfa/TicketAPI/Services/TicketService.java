@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,11 +32,11 @@ public class TicketService {
     }
 
     @Transactional(readOnly = true)
-    public List<TicketDTO> findByModuloId(Long clienteId) {
-        List<Ticket> tickets = ticketRepository.findByModuloId(clienteId);
-        return tickets.stream()
+    public List<TicketDTO> findByModuloId(int month, int year, Long moduloId) {
+        List<TicketDTO> tickets = ticketRepository.findByModuloId(moduloId).stream()
                 .map(TicketDTO::new)
                 .collect(Collectors.toList());
+        return getByDate(month, year, tickets);
     }
 
     @Transactional()
@@ -51,4 +52,26 @@ public class TicketService {
         return new TicketDTO(ticket);
     }
 
+    public List<TicketDTO> findByDateModulo (int month, int year){
+        List<TicketDTO> listTickets = this.findAll();
+        return getByDate(month, year, listTickets).stream().sorted(Comparator.comparing(TicketDTO::getModuloId).thenComparing(TicketDTO::getClienteId))
+                .collect(Collectors.toList());
+    }
+
+    public List<TicketDTO> findByDateClient (int month, int year){
+        List<TicketDTO> listTickets = this.findAll();
+        return getByDate(month, year, listTickets).stream().sorted(Comparator.comparing(TicketDTO::getClienteId).thenComparing(TicketDTO::getModuloId))
+                .collect(Collectors.toList());
+    }
+
+    private List<TicketDTO> getByDate(int month, int year, List<TicketDTO> listTickets) {
+        Calendar initialDate = Calendar.getInstance();
+        initialDate.set(Calendar.YEAR, year);
+        initialDate.set(Calendar.MONTH, month);
+        Calendar finalDate = (Calendar) initialDate.clone();
+        int lastDay = finalDate.getActualMaximum(Calendar.DAY_OF_MONTH);
+        finalDate.set(Calendar.DAY_OF_MONTH, lastDay);
+        initialDate.set(Calendar.DAY_OF_MONTH, 1);
+        return listTickets.stream().filter(x -> !x.getDataAbertura().before(initialDate.getTime()) && !x.getDataAbertura().after(finalDate.getTime())).collect(Collectors.toList());
+    }
 }

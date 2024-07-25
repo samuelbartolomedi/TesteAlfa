@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Data
@@ -19,8 +20,10 @@ public class Ticket {
     private Long id;
     @Column(columnDefinition = "TEXT")
     private String titulo;
-    private LocalDate dataAbertura;
-    private LocalDate dataEncerramento;
+    @Column(name = "data_abertura")
+    private Date dataAbertura;
+    @Column(name = "data_encerramento")
+    private Date dataEncerramento;
     @Column(name = "cliente_id")
     private Long clienteId;
     @Column(name = "modulo_id")
@@ -42,19 +45,19 @@ public class Ticket {
         this.titulo = titulo;
     }
 
-    public LocalDate getDataAbertura() {
+    public Date getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(LocalDate dataAbertura) {
+    public void setDataAbertura(Date dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
-    public LocalDate getDataEncerramento() {
+    public Date getDataEncerramento() {
         return dataEncerramento;
     }
 
-    public void setDataEncerramento(LocalDate dataEncerramento) {
+    public void setDataEncerramento(Date dataEncerramento) {
         this.dataEncerramento = dataEncerramento;
     }
 
