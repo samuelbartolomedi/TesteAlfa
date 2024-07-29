@@ -2,13 +2,17 @@ package com.TesteAlfa.RecipesAPI.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RecipeResponse {
     private int count;
     private List<Recipe> recipes;
 
-    // Getters and setters
     public int getCount() {
         return count;
     }

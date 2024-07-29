@@ -1,7 +1,12 @@
 package com.TesteAlfa.RecipesAPI.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Recipe {
     private String publisher;
@@ -12,7 +17,6 @@ public class Recipe {
     private double social_rank;
     private String publisher_url;
 
-    // Getters and setters
     public String getPublisher() {
         return publisher;
     }
